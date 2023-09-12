@@ -1,23 +1,33 @@
 import styled from "styled-components";
 import { LogoDark } from "../../assets";
 import { Close, Hamburger } from "../svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 // import "../../index.css";
 
 function Header() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
+  const backDrop = useRef<HTMLDivElement | null>(null);
+
+  const backDropHandler: React.MouseEventHandler<HTMLDivElement> = (event) => {
+    if (event.target === backDrop.current) {
+      setShowMenu(false);
+    }
+  };
+
   return (
     <HeaderComponent>
-      <Logo src={LogoDark} alt="logo" />
+      <Link to={"/"} onClick={() => setShowMenu(false)}>
+        <Logo src={LogoDark} alt="logo" />
+      </Link>
       {showMenu ? (
         <Close onClick={() => setShowMenu(false)} />
       ) : (
         <Hamburger onClick={() => setShowMenu(true)} />
       )}
       {showMenu ? (
-        <Backdrop>
+        <Backdrop ref={backDrop} onClick={backDropHandler}>
           <Menu>
             <NavList>
               <Link

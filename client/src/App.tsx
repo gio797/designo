@@ -18,17 +18,14 @@ const router = createBrowserRouter(
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="design" element={<Design />} />
+      <Route path="design/:category" element={<Design />} />
       <Route path="location" element={<Location />} />
     </Route>
   )
 );
 
 function App() {
-  return (
-    <div className="app">
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

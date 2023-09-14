@@ -4,11 +4,13 @@ import { ProjectType } from "../../types";
 const DesignProject: React.FC<{ project: ProjectType }> = ({ project }) => {
   const { image, title, description } = project;
   return (
-    <li>
-      <Poster src={`http://localhost:3000${image}`} />
-      <h2>{title}</h2>
-      <p>{description}</p>
-    </li>
+    <ProjectItem>
+      <Poster src={"https://designo-api-production.up.railway.app" + image} />
+      <Wrapper>
+        <ProjectTitle>{title}</ProjectTitle>
+        <ProjectDescription>{description}</ProjectDescription>
+      </Wrapper>
+    </ProjectItem>
   );
 };
 

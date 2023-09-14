@@ -4,6 +4,12 @@ import { ProjectType } from "../../types";
 import { useParams } from "react-router-dom";
 import { getCategoryProjects } from "../../axios";
 import DesignProjects from "../../components/design/DesignProjects";
+import Project from "../../components/shared/Project";
+import {
+  AppDesignMobile,
+  GraphicDesignMobile,
+  WebDesignMobile,
+} from "../../assets";
 
 function Design() {
   const [data, setData] = useState<ProjectType[]>([]);
@@ -23,19 +29,36 @@ function Design() {
     getData();
   }, [category]);
 
+  const bannerDescription =
+    category === "web"
+      ? "We build websites that serve as powerful marketing tools and bring memorable brand experiences."
+      : category === "app"
+      ? "Our mobile designs bring intuitive digital solutions to your customers right at their fingertips."
+      : "We deliver eye-catching branding materials that are tailored to meet your business objectives.";
+
   return (
     <>
       <Banner>
-        <BannerTitle>Web Design</BannerTitle>
-        <BannerDescription>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus
-          incidunt fuga minima esse? Minus tempora veritatis obcaecati natus
-          nihil inventore omnis magnam eius at. Velit reiciendis modi ratione
-          nobis deserunt!
-        </BannerDescription>
+        <BannerTitle>{category} Design</BannerTitle>
+        <BannerDescription>{bannerDescription}</BannerDescription>
       </Banner>
       <Wrapper>
         {data.length > 0 ? <DesignProjects projects={data} /> : null}
+        <ProjectsLinks>
+          {category !== "web" ? (
+            <Project title="WEB DESIGN" image={WebDesignMobile} to="web" />
+          ) : null}
+          {category !== "app" ? (
+            <Project title="APP DESIGN" image={AppDesignMobile} to="app" />
+          ) : null}
+          {category !== "graphic" ? (
+            <Project
+              title="GRAPHIC DESIGN"
+              image={GraphicDesignMobile}
+              to="graphic"
+            />
+          ) : null}
+        </ProjectsLinks>
       </Wrapper>
     </>
   );
